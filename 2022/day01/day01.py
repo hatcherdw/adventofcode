@@ -1,20 +1,29 @@
-def most_calories(inventory: str) -> int:
-    '''Which elf is carrying the most calories'''
+from webbrowser import get
+
+
+def get_totals(inventory: str) -> list[int]:
     split_inventory = inventory.split('\n\n')
-    most = 0
+    totals = []
     for individual in split_inventory:
         items = individual.split('\n')
         items = [int(item) for item in items]
-        total_calories = sum(items)
-        if total_calories > most:
-            most = total_calories
-    return most
+        totals.append(sum(items))
+    return totals
+
+
+def most_calories(inventory: str) -> int:
+    '''Which elf is carrying the most calories'''
+    totals = get_totals(inventory)
+    return max(totals)
 
 
 def main():
     with open('input.txt', 'r') as f:
         input = f.read()
-    print(most_calories(input))
+    totals = get_totals(input)
+    sorted_totals = sorted(totals)
+    print(sorted_totals[-1])
+    print(sum(sorted_totals[-3:]))
 
 
 if __name__ == '__main__':
