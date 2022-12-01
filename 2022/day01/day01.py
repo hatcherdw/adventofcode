@@ -1,6 +1,3 @@
-from webbrowser import get
-
-
 def get_totals(inventory: str) -> list[int]:
     split_inventory = inventory.split('\n\n')
     totals = []
